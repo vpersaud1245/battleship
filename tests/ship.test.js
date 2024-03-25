@@ -8,13 +8,13 @@ describe("Ship class", () => {
     ship = new Ship(5);
   });
 
-  it("Increases the hit count when hit() is called", () => {
+  it("Increases hit count when the hit method is called", () => {
     ship.hit();
     ship.hit();
     expect(ship.hits).toBe(2);
   });
 
-  it("isSunk() returns true or false based on  ship hits vs length", () => {
+  it("Returns correct sunk status based on ship hits", () => {
     expect(ship.isSunk()).toBe(false);
     ship.hits = 2;
     expect(ship.isSunk()).toBe(false);
