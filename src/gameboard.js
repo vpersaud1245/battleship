@@ -34,5 +34,6 @@ export default class Gameboard {
         this.gameboard[yIndex + i][xIndex] = newShip;
       }
     }
+    this.ships.push(newShip);
   }
 }
