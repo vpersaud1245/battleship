@@ -34,4 +34,10 @@ describe("Gameboard", () => {
     expect(gameboard.gameboard[2][0]).not.toBeUndefined();
     expect(gameboard.gameboard[2][3]).toBeUndefined();
   });
+
+  it("Updates the gameboard Ship array when a ship is placed", () => {
+    gameboard.placeShip(1, 1, 5, "X");
+    expect(gameboard.ships.length).toBe(1);
+    expect(gameboard.ships[0]).toMatchObject({ length: 5, hits: 0 });
+  });
 });
