@@ -57,4 +57,9 @@ describe("Gameboard", () => {
       "Throws error if coordinate is already in the coordinatesAttacked Array",
     );
   });
+
+  describe("coordinateHasShip", () => {
+    it.todo("Returns true if coordinates contain a ship");
+    it.todo("Returns false if coordinate is empty");
+  });
 });
