@@ -53,7 +53,28 @@ export default class Gameboard {
     return false;
   }
 
-  // recieveAttack(xcoordinate, ycoordinate) {
-  //   if (this.coordinatesAttacked)
-  // }
+  #getShipAtCoordinate(xcoordinate, ycoordinate) {
+    const xIndex = this.getIndex(xcoordinate);
+    const yIndex = this.getIndex(ycoordinate);
+    return this.gameboard[yIndex][xIndex];
+  }
+
+  #areCoordinatesDuplicate(xcoordinate, ycoordinate) {
+    return this.coordinatesAttacked.some(
+      (coords) => coords[0] === xcoordinate && coords[1] === ycoordinate,
+    );
+  }
+
+  recieveAttack(xcoordinate, ycoordinate) {
+    if (this.#areCoordinatesDuplicate(xcoordinate, ycoordinate)) {
+      throw new Error("Coordinates have already been attacked");
+    }
+    this.coordinatesAttacked.push([xcoordinate, ycoordinate]);
+    if (this.coordinateHasShip(xcoordinate, ycoordinate)) {
+      const ship = this.#getShipAtCoordinate(xcoordinate, ycoordinate);
+      ship.hit();
+      return true;
+    }
+    return false;
+  }
 }
