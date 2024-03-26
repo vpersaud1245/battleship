@@ -35,5 +35,6 @@ export default class Gameboard {
       }
     }
     this.ships.push(newShip);
+    return newShip;
   }
 }
