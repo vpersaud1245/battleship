@@ -19,6 +19,14 @@ export default class Gameboard {
     return coordinate - 1;
   }
 
+  /**
+   *
+   * @param {Number} xcoordinate
+   * @param {Number} ycoordinate
+   * @param {Number} shipLength
+   * @param {String} direction - direction ship will face 'X' for horizontal 'Y' for vertical
+   * @returns
+   */
   placeShip(xcoordinate, ycoordinate, shipLength, direction) {
     const newShip = new Ship(shipLength);
     const xIndex = this.getIndex(xcoordinate);
@@ -37,4 +45,15 @@ export default class Gameboard {
     this.ships.push(newShip);
     return newShip;
   }
+
+  coordinateHasShip(xcoordinate, ycoordinate) {
+    const xIndex = this.getIndex(xcoordinate);
+    const yIndex = this.getIndex(ycoordinate);
+    if (this.gameboard[yIndex][xIndex] instanceof Ship) return true;
+    return false;
+  }
+
+  // recieveAttack(xcoordinate, ycoordinate) {
+  //   if (this.coordinatesAttacked)
+  // }
 }
