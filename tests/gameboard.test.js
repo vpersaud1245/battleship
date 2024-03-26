@@ -50,13 +50,37 @@ describe("Gameboard", () => {
   });
 
   describe("Recieve Attack", () => {
-    it.todo("Returns true if ship was hit");
-    it.todo("Returns false if there was a miss");
-    it.todo("Increases the ships hit count if ship is in those coordinates");
-    it.todo("Adds coodinate to coordinatesAttacked Array");
-    it.todo(
-      "Throws error if coordinate is already in the coordinatesAttacked Array",
-    );
+    it("Ship hits increases by 1 if ship was hit", () => {
+      const newShip = gameboard.placeShip(1, 1, 5, "X");
+      gameboard.recieveAttack(1, 1);
+      expect(newShip).toMatchObject({ length: 5, hits: 1 });
+      gameboard.recieveAttack(2, 1);
+      expect(newShip).toMatchObject({ length: 5, hits: 2 });
+    });
+    it("Returns true if ship was hit", () => {
+      gameboard.placeShip(1, 1, 5, "X");
+      expect(gameboard.recieveAttack(1, 1)).toBe(true);
+      expect(gameboard.recieveAttack(2, 1)).toBe(true);
+      expect(gameboard.recieveAttack(5, 1)).toBe(true);
+    });
+    it("Returns false if there was a miss", () => {
+      gameboard.placeShip(1, 1, 5, "X");
+      expect(gameboard.recieveAttack(1, 2)).toBe(false);
+      expect(gameboard.recieveAttack(6, 1)).toBe(false);
+    });
+    it("Adds coodinate to coordinatesAttacked Array", () => {
+      gameboard.placeShip(1, 1, 5, "X");
+      gameboard.recieveAttack(1, 1);
+      gameboard.recieveAttack(1, 2);
+      expect(gameboard.coordinatesAttacked).toContainEqual([1, 1]);
+      expect(gameboard.coordinatesAttacked).toContainEqual([1, 2]);
+    });
+    it("Throws error if coordinate is already in the coordinatesAttacked Array", () => {
+      gameboard.recieveAttack(1, 1);
+      expect(() => {
+        gameboard.recieveAttack(1, 1);
+      }).toThrow(new Error("Coordinates have already been attacked"));
+    });
   });
 
   describe("coordinateHasShip", () => {
