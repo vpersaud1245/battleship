@@ -46,7 +46,7 @@ export default class Gameboard {
     return newShip;
   }
 
-  coordinateHasShip(xcoordinate, ycoordinate) {
+  #coordinateHasShip(xcoordinate, ycoordinate) {
     const xIndex = this.getIndex(xcoordinate);
     const yIndex = this.getIndex(ycoordinate);
     if (this.gameboard[yIndex][xIndex] instanceof Ship) return true;

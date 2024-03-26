@@ -82,23 +82,4 @@ describe("Gameboard", () => {
       }).toThrow(new Error("Coordinates have already been attacked"));
     });
   });
-
-  describe("coordinateHasShip", () => {
-    it("Returns true if coordinates contain a ship", () => {
-      gameboard.placeShip(1, 1, 5, "X");
-      gameboard.placeShip(3, 4, 3, "Y");
-      expect(gameboard.coordinateHasShip(1, 1)).toBe(true);
-      expect(gameboard.coordinateHasShip(2, 1)).toBe(true);
-      expect(gameboard.coordinateHasShip(3, 4)).toBe(true);
-      expect(gameboard.coordinateHasShip(3, 6)).toBe(true);
-    });
-    it("Returns false if coordinate is empty", () => {
-      gameboard.placeShip(1, 1, 5, "X");
-      gameboard.placeShip(3, 4, 3, "Y");
-      expect(gameboard.coordinateHasShip(1, 2)).toBe(false);
-      expect(gameboard.coordinateHasShip(1, 6)).toBe(false);
-      expect(gameboard.coordinateHasShip(3, 3)).toBe(false);
-      expect(gameboard.coordinateHasShip(3, 7)).toBe(false);
-    });
-  });
 });
