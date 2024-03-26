@@ -70,7 +70,7 @@ export default class Gameboard {
       throw new Error("Coordinates have already been attacked");
     }
     this.coordinatesAttacked.push([xcoordinate, ycoordinate]);
-    if (this.coordinateHasShip(xcoordinate, ycoordinate)) {
+    if (this.#coordinateHasShip(xcoordinate, ycoordinate)) {
       const ship = this.#getShipAtCoordinate(xcoordinate, ycoordinate);
       ship.hit();
       return true;
