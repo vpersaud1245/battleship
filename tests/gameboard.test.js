@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-import { experiments } from "webpack";
 import Gameboard from "../src/gameboard";
 
 describe("Gameboard", () => {
@@ -14,7 +13,7 @@ describe("Gameboard", () => {
     expect(gameboard.getIndex(2)).toBe(1);
   });
 
-  describe("Place Ship", () => {
+  describe("placeShip", () => {
     it("Places ship at given coordinates along the X axis", () => {
       gameboard.placeShip(1, 1, 5, "X");
       expect(gameboard.gameboard[0][0]).not.toBeUndefined();
@@ -49,7 +48,7 @@ describe("Gameboard", () => {
     });
   });
 
-  describe("Recieve Attack", () => {
+  describe("recieveAttack", () => {
     it("Ship hits increases by 1 if ship was hit", () => {
       const newShip = gameboard.placeShip(1, 1, 5, "X");
       gameboard.recieveAttack(1, 1);
@@ -80,6 +79,32 @@ describe("Gameboard", () => {
       expect(() => {
         gameboard.recieveAttack(1, 1);
       }).toThrow(new Error("Coordinates have already been attacked"));
+    });
+  });
+
+  describe("areAllShipsSunk", () => {
+    it("Returns true if all ships in the ship array are sunk", () => {
+      gameboard.placeShip(1, 1, 5, "X");
+      for (let i = 1; i <= 5; i += 1) {
+        gameboard.recieveAttack(i, 1);
+      }
+      gameboard.placeShip(2, 2, 3, "Y");
+      for (let i = 2; i <= 4; i += 1) {
+        gameboard.recieveAttack(2, i);
+      }
+      expect(gameboard.areAllShipsSunk()).toBe(true);
+    });
+    it("Returns false if at least one ship is not sunk", () => {
+      gameboard.placeShip(1, 1, 5, "X");
+      for (let i = 1; i <= 5; i += 1) {
+        gameboard.recieveAttack(i, 1);
+      }
+      gameboard.placeShip(2, 2, 3, "Y");
+
+      expect(gameboard.areAllShipsSunk()).toBe(false);
+    });
+    it("If no ships are placed returns false", () => {
+      expect(gameboard.areAllShipsSunk()).toBe(false);
     });
   });
 });
