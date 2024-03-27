@@ -8,11 +8,6 @@ describe("Gameboard", () => {
     gameboard = new Gameboard();
   });
 
-  it("Converts coordinate to array index", () => {
-    expect(gameboard.getIndex(5)).toBe(4);
-    expect(gameboard.getIndex(2)).toBe(1);
-  });
-
   describe("placeShip", () => {
     it("Places ship at given coordinates along the X axis", () => {
       gameboard.placeShip(1, 1, 5, "X");

@@ -17,7 +17,7 @@ export default class Gameboard {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  getIndex(coordinate) {
+  #getIndex(coordinate) {
     return coordinate - 1;
   }
 
