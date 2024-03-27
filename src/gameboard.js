@@ -10,11 +10,13 @@ import Ship from "./ship";
 
 export default class Gameboard {
   constructor() {
+    // eslint-disable-next-line no-unused-vars
     this.gameboard = [...Array(10)].map((x) => Array(10));
     this.ships = [];
     this.coordinatesAttacked = [];
   }
 
+  // eslint-disable-next-line class-methods-use-this
   getIndex(coordinate) {
     return coordinate - 1;
   }
@@ -76,5 +78,16 @@ export default class Gameboard {
       return true;
     }
     return false;
+  }
+
+  areAllShipsSunk() {
+    if (this.ships.length === 0) return false;
+    let allShipsSunk = true;
+    this.ships.forEach((ship) => {
+      if (!ship.isSunk()) {
+        allShipsSunk = false;
+      }
+    });
+    return allShipsSunk;
   }
 }
